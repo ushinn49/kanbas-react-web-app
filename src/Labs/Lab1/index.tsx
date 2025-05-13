@@ -1,7 +1,7 @@
 export default function Lab1() {
   return (
     <div id="wd-lab1">
-      <h2>Lab 1</h2>
+            <h2>Lab 1</h2>
       <h3>HTML Examples</h3>
       <div id="wd-h-tag">
         <h4>Heading Tags</h4>
@@ -156,7 +156,7 @@ Your favorite books (in no particular order)
   <br />
   Loading a local image:
   <br />
-  <img id="wd-teslabot" src="/images/teslabot.jpg" height="200px" /></div>
+  <img id="wd-teslabot" src="/pictures/teslabot.jpg" height="200px" /></div>
   <div id="wd-forms">
 <h4>Form Elements</h4>
 <form id="wd-text-fields">
