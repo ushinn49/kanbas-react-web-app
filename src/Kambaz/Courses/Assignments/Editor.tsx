@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { Form, Row, Col, Button, FloatingLabel } from "react-bootstrap";
 
 export default function AssignmentEditor() {
-  const { cid, aid } = useParams();
+  const { cid } = useParams();
   const assignmentName = "A1 - ENV + HTML";
   const assignmentDescription = "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section Links to each of the lab assignments Link to the Kanbas application Links to all relevant source code repositories The Kanbas application should include a link to navigate back to the landing page.";
 
