@@ -1,198 +1,131 @@
-export default function AssignmentEditor() {
-  const assignmentName = "A1 - ENV + HTML";
-  const assignmentDescription = "The assignment is available online. Submit a link to the landing page of your Environment Setup and a link to the GitHub repository for your HTML exercises.";
-  const points = 100;
-  const assignmentGroup = "ASSIGNMENTS";
-  const displayGradeAs = "Percentage";
+import { useParams, Link } from "react-router-dom";
+import { Form, Row, Col, Button, FloatingLabel } from "react-bootstrap";
 
+export default function AssignmentEditor() {
+  const { cid, aid } = useParams();
+  const assignmentName = "A1 - ENV + HTML";
+  const assignmentDescription = "The assignment is available online Submit a link to the landing page of your Web application running on Netlify. The landing page should include the following: Your full name and section Links to each of the lab assignments Link to the Kanbas application Links to all relevant source code repositories The Kanbas application should include a link to navigate back to the landing page.";
 
   return (
-    <div id="wd-assignments-editor" style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <div style={{ marginBottom: "15px" }}>
-        <label htmlFor="wd-name" style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>
-          Assignment Name
-        </label>
-        <input 
-          id="wd-name" 
-          defaultValue={assignmentName}
-          style={{ width: "100%", padding: "8px", boxSizing: "border-box", borderRadius: "4px", border: "1px solid #ccc" }} 
-        />
-      </div>
+    <div id="wd-assignments-editor" className="p-3">
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="wd-name">Assignment Name</Form.Label>
+        <Form.Control id="wd-name" defaultValue={assignmentName} />
+      </Form.Group>
 
-      <div style={{ marginBottom: "20px" }}>
-        <textarea 
-          id="wd-description" 
-          rows={4}
-          defaultValue={assignmentDescription} 
-          style={{ width: "100%", padding: "8px", boxSizing: "border-box", borderRadius: "4px", border: "1px solid #ccc" }}
-        />
-      </div>
+      <Form.Group className="mb-3">
+        <FloatingLabel controlId="wd-description" label="Description">
+          <Form.Control
+            as="textarea"
+            defaultValue={assignmentDescription}
+            style={{ height: '150px' }}
+          />
+        </FloatingLabel>
+      </Form.Group>
 
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <tbody>
+      <Row className="mb-3 align-items-center">
+        <Col md={3} className="text-md-end">
+          <Form.Label htmlFor="wd-points">Points</Form.Label>
+        </Col>
+        <Col md={9}>
+          <Form.Control id="wd-points" type="number" defaultValue={100} />
+        </Col>
+      </Row>
 
-          <tr>
-            <td style={{ textAlign: "right", verticalAlign: "top", padding: "8px", width: "20%" }}>
-              <label htmlFor="wd-points" style={{ fontWeight: "bold" }}>Points</label>
-            </td>
-            <td style={{ padding: "8px" }}>
-              <input 
-                id="wd-points" 
-                type="number" 
-                defaultValue={points}
-                style={{ width: "150px", padding: "8px", boxSizing: "border-box", borderRadius: "4px", border: "1px solid #ccc" }} 
-              />
-            </td>
-          </tr>
+      <Row className="mb-3 align-items-center">
+        <Col md={3} className="text-md-end">
+          <Form.Label htmlFor="wd-group">Assignment Group</Form.Label>
+        </Col>
+        <Col md={9}>
+          <Form.Select id="wd-group" defaultValue="ASSIGNMENTS">
+            <option value="ASSIGNMENTS">ASSIGNMENTS</option>
+            <option value="QUIZZES">QUIZZES</option>
+            <option value="EXAMS">EXAMS</option>
+            <option value="PROJECT">PROJECT</option>
+          </Form.Select>
+        </Col>
+      </Row>
 
-          <tr>
-            <td style={{ textAlign: "right", verticalAlign: "top", padding: "8px" }}>
-              <label htmlFor="wd-group" style={{ fontWeight: "bold" }}>Assignment Group</label>
-            </td>
-            <td style={{ padding: "8px" }}>
-              <select 
-                id="wd-group" 
-                defaultValue={assignmentGroup}
-                style={{ width: "250px", padding: "8px", boxSizing: "border-box", borderRadius: "4px", border: "1px solid #ccc" }}
-              >
-                <option value="ASSIGNMENTS">ASSIGNMENTS</option>
-                <option value="QUIZZES">QUIZZES</option>
-                <option value="EXAMS">EXAMS</option>
-                <option value="PROJECT">PROJECT</option>
-              </select>
-            </td>
-          </tr>
+      <Row className="mb-3 align-items-center">
+        <Col md={3} className="text-md-end">
+          <Form.Label htmlFor="wd-display-grade-as">Display Grade as</Form.Label>
+        </Col>
+        <Col md={9}>
+          <Form.Select id="wd-display-grade-as" defaultValue="Percentage">
+            <option value="Percentage">Percentage</option>
+            <option value="Points">Points</option>
+          </Form.Select>
+        </Col>
+      </Row>
 
-          <tr>
-            <td style={{ textAlign: "right", verticalAlign: "top", padding: "8px" }}>
-              <label htmlFor="wd-display-grade-as" style={{ fontWeight: "bold" }}>Display Grade as</label>
-            </td>
-            <td style={{ padding: "8px" }}>
-              <select 
-                id="wd-display-grade-as" 
-                defaultValue={displayGradeAs}
-                style={{ width: "250px", padding: "8px", boxSizing: "border-box", borderRadius: "4px", border: "1px solid #ccc" }}
-              >
-                <option value="Percentage">Percentage</option>
-                <option value="Points">Points</option>
-                <option value="Letter Grade">Letter Grade</option>
-              </select>
-            </td>
-          </tr>
-          
-          <tr>
-            <td style={{ textAlign: "right", verticalAlign: "top", padding: "8px" }}>
-              <label htmlFor="wd-submission-type" style={{ fontWeight: "bold" }}>Submission Type</label>
-            </td>
-            <td style={{ padding: "8px" }}>
-              <select 
-                id="wd-submission-type" 
-                defaultValue="Online"
-                style={{ width: "250px", padding: "8px", boxSizing: "border-box", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "10px" }}
-              >
-                <option value="Online">Online</option>
-                <option value="On Paper">On Paper</option>
-                <option value="No Submission">No Submission</option>
-              </select>
-              
+      <Row className="mb-3 align-items-center">
+        <Col md={3} className="text-md-end">
+          <Form.Label>Submission Type</Form.Label>
+        </Col>
+        <Col md={9}>
+          <Form.Select id="wd-submission-type" defaultValue="Online">
+            <option value="Online">Online</option>
+            <option value="On Paper">On Paper</option>
+            <option value="No Submission">No Submission</option>
+          </Form.Select>
+        </Col>
+      </Row>
 
-              <div style={{ border: "1px solid #eee", padding: "10px", borderRadius: "4px" }}>
-                <strong>Online Entry Options</strong>
-                <div>
-                  <input type="checkbox" id="wd-text-entry" defaultChecked /> 
-                  <label htmlFor="wd-text-entry" style={{ marginLeft: "5px" }}>Text Entry</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="wd-website-url" />
-                  <label htmlFor="wd-website-url" style={{ marginLeft: "5px" }}>Website URL</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="wd-media-recordings" defaultChecked/>
-                  <label htmlFor="wd-media-recordings" style={{ marginLeft: "5px" }}>Media Recordings</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="wd-student-annotation" />
-                  <label htmlFor="wd-student-annotation" style={{ marginLeft: "5px" }}>Student Annotation</label>
-                </div>
-                <div>
-                  <input type="checkbox" id="wd-file-upload" />
-                  <label htmlFor="wd-file-upload" style={{ marginLeft: "5px" }}>File Uploads</label>
-                </div>
-              </div>
-            </td>
-          </tr>
+      {true && (
+        <Row className="mb-3">
+          <Col md={3}></Col>
+          <Col md={9} className="border p-3 rounded">
+            <Form.Label className="fw-bold">Online Entry Options</Form.Label>
+            <Form.Check type="checkbox" id="wd-text-entry" label="Text Entry" />
+            <Form.Check type="checkbox" id="wd-website-url" label="Website URL" defaultChecked />
+            <Form.Check type="checkbox" id="wd-media-recordings" label="Media Recordings" />
+            <Form.Check type="checkbox" id="wd-student-annotation" label="Student Annotation" />
+            <Form.Check type="checkbox" id="wd-file-upload" label="File Uploads" />
+          </Col>
+        </Row>
+      )}
 
-          <tr>
-            <td style={{ textAlign: "right", verticalAlign: "top", padding: "8px" }}>
-              <label htmlFor="wd-assign-to" style={{ fontWeight: "bold" }}>Assign to</label>
-            </td>
-            <td style={{ padding: "8px" }}>
-              <input 
-                id="wd-assign-to" 
-                defaultValue="Everyone"
-                style={{ width: "100%", padding: "8px", boxSizing: "border-box", borderRadius: "4px", border: "1px solid #ccc" }} 
-              />
-            </td>
-          </tr>
+      <Row className="mb-3 align-items-center">
+        <Col md={3} className="text-md-end">
+          <Form.Label htmlFor="wd-assign-to">Assign to</Form.Label>
+        </Col>
+        <Col md={9}>
+          <Form.Control id="wd-assign-to" defaultValue="Everyone" />
+        </Col>
+      </Row>
 
-          <tr>
-            <td style={{ textAlign: "right", verticalAlign: "top", padding: "8px" }}>
-              <label htmlFor="wd-due-date" style={{ fontWeight: "bold" }}>Due</label>
-            </td>
-            <td style={{ padding: "8px" }}>
-              <input 
-                type="date" 
-                id="wd-due-date" 
-                defaultValue="2024-05-12"
-                style={{ width: "250px", padding: "8px", boxSizing: "border-box", borderRadius: "4px", border: "1px solid #ccc" }} 
-              />
-            </td>
-          </tr>
+      <Row className="mb-3 align-items-center">
+        <Col md={3} className="text-md-end">
+          <Form.Label htmlFor="wd-due-date">Due</Form.Label>
+        </Col>
+        <Col md={9}>
+          <Form.Control id="wd-due-date" type="date" defaultValue="2024-05-13" />
+        </Col>
+      </Row>
 
-          <tr>
-            <td style={{ textAlign: "right", verticalAlign: "top", padding: "8px" }}>
-              <label htmlFor="wd-available-from" style={{ fontWeight: "bold" }}>Available from</label>
-            </td>
-            <td style={{ padding: "8px" }}>
-              <input 
-                type="date" 
-                id="wd-available-from" 
-                defaultValue="2024-05-06"
-                style={{ width: "250px", padding: "8px", boxSizing: "border-box", borderRadius: "4px", border: "1px solid #ccc" }} 
-              />
-            </td>
-          </tr>
+      <Row className="mb-3">
+        <Col md={3} className="text-md-end">
+          <Form.Label htmlFor="wd-available-from">Available from</Form.Label>
+        </Col>
+        <Col md={4}>
+          <Form.Control id="wd-available-from" type="date" defaultValue="2024-05-06" />
+        </Col>
+        <Col md={1} className="text-md-end ps-0">
+            <Form.Label htmlFor="wd-available-until">Until</Form.Label>
+        </Col>
+        <Col md={4}>
+          <Form.Control id="wd-available-until" type="date" defaultValue="2024-05-20" />
+        </Col>
+      </Row>
 
-          <tr>
-            <td style={{ textAlign: "right", verticalAlign: "top", padding: "8px" }}>
-              <label htmlFor="wd-available-until" style={{ fontWeight: "bold" }}>Until</label>
-            </td>
-            <td style={{ padding: "8px" }}>
-              <input 
-                type="date" 
-                id="wd-available-until" 
-                defaultValue="2024-05-26"
-                style={{ width: "250px", padding: "8px", boxSizing: "border-box", borderRadius: "4px", border: "1px solid #ccc" }} 
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-
-      <div style={{ marginTop: "20px", paddingTop: "15px", borderTop: "1px solid #ccc", display: "flex", justifyContent: "flex-end", gap: "10px" }}>
-        <button 
-          style={{ padding: "10px 15px", backgroundColor: "#f0f0f0", border: "1px solid #ccc", borderRadius: "4px", cursor: "pointer" }}
-
-        >
+      <hr />
+      <div className="d-flex justify-content-end">
+        <Link to={`/Kambaz/Courses/${cid}/Assignments`} className="btn btn-light me-2 border">
           Cancel
-        </button>
-        <button 
-          style={{ padding: "10px 15px", backgroundColor: "green", color: "white", border: "1px solid green", borderRadius: "4px", cursor: "pointer" }}
-
-        >
+        </Link>
+        <Button variant="danger">
           Save
-        </button>
+        </Button>
       </div>
     </div>
   );

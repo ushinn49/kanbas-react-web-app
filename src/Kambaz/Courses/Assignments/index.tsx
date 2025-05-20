@@ -1,131 +1,71 @@
+import { Link } from "react-router-dom";
+import { Button, FormControl, InputGroup, ListGroup } from "react-bootstrap";
+import { FaPlus, FaSearch, FaEllipsisV } from "react-icons/fa";
+import { BsGripVertical } from 'react-icons/bs';
+
 export default function Assignments() {
+  const assignments = [
+    { _id: "A101", title: "A1 - ENV + HTML", course: "RS101", points: 100, due: "May 13 at 11:59pm", available: "May 6 at 12:00am", multipleModules: true },
+    { _id: "A102", title: "A2 - CSS + BOOTSTRAP", course: "RS101", points: 100, due: "May 20 at 11:59pm", available: "May 13 at 12:00am", multipleModules: true },
+    { _id: "A103", title: "A3 - JAVASCRIPT + REACT", course: "RS101", points: 100, due: "May 27 at 11:59pm", available: "May 20 at 12:00am", multipleModules: true },
+  ];
+
   return (
-    <div id="wd-assignments" style={{ padding: "15px" }}>
-
-      <div style={{ display: "flex", alignItems: "center", marginBottom: "15px", gap: "5px" }}>
-        <input 
-          placeholder="Search for Assignments"
-          id="wd-search-assignment" 
-          style={{ flexGrow: 1, padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
-        />
-        <button 
-          id="wd-add-assignment-group"
-          style={{ padding: "8px 12px", backgroundColor: "#f0f0f0", border: "1px solid #ccc", borderRadius: "4px", cursor: "pointer" }}
-        >
-          + Group
-        </button>
-        <button 
-          id="wd-add-assignment"
-          style={{ padding: "8px 12px", backgroundColor: "#dc3545", color: "white", border: "1px solid #dc3545", borderRadius: "4px", cursor: "pointer" }}
-        >
-          + Assignment
-        </button>
+    <div id="wd-assignments" className="p-3">
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <div className="w-25">
+          <InputGroup>
+            <InputGroup.Text><FaSearch /></InputGroup.Text>
+            <FormControl
+              placeholder="Search for Assignments"
+              id="wd-search-assignment"
+            />
+          </InputGroup>
+        </div>
+        <div>
+          <Button variant="light" className="me-1 border" id="wd-add-assignment-group">
+            <FaPlus className="me-1" /> Group
+          </Button>
+          <Button variant="danger" id="wd-add-assignment">
+            <FaPlus className="me-1" /> Assignment
+          </Button>
+        </div>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #ccc", paddingBottom: "10px", marginBottom: "10px" }}>
-        <h3 id="wd-assignments-title" style={{ margin: 0, fontSize: "1.2em" }}>
-          ASSIGNMENTS <span style={{ fontWeight: "normal", color: "#666" }}>40% of Total</span>
-        </h3>
-        <button 
-          style={{ 
-            padding: "5px 8px", 
-            backgroundColor: "#f0f0f0", 
-            border: "1px solid #ccc", 
-            borderRadius: "20px",
-            cursor: "pointer",
-            minWidth: "30px" 
-          }}
-          title="Add assignment to this group"
-        >
-          +
-        </button>
-      </div>
-      
-
-      <ul id="wd-assignment-list" style={{ listStyleType: "none", padding: 0 }}>
-
-        <li 
-          className="wd-assignment-list-item" 
-          style={{ 
-            padding: "10px", 
-            border: "1px solid #ccc", 
-            borderLeft: "4px solid green", 
-            marginBottom: "8px", 
-            borderRadius: "4px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
-        >
-          <a 
-            href="#/Kambaz/Courses/1234/Assignments/123" 
-            className="wd-assignment-link"
-            style={{ textDecoration: "none", color: "green", fontWeight: "bold" }}
-          >
-            A1 - ENV + HTML
-            <div style={{ fontSize: '0.8em', color: '#555', fontWeight: 'normal' }}>
-              Multiple Modules | <strong>Not available until</strong> May 6 at 12:00am | 
-              <strong>Due</strong> May 12 at 11:59pm | 100 pts
-            </div>
-          </a>
-          <span style={{ marginLeft: "10px", color: "#888" }}>⋮</span>
-        </li>
-        
-
-        <li 
-          className="wd-assignment-list-item"
-          style={{ 
-            padding: "10px", 
-            border: "1px solid #ccc", 
-            borderLeft: "4px solid green",
-            marginBottom: "8px", 
-            borderRadius: "4px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
-        >
-          <a 
-            href="#/Kambaz/Courses/1234/Assignments/124"
-            className="wd-assignment-link"
-            style={{ textDecoration: "none", color: "green", fontWeight: "bold" }}
-          >
-            A2 - CSS + BOOTSTRAP
-            <div style={{ fontSize: '0.8em', color: '#555', fontWeight: 'normal' }}>
-              Multiple Modules | <strong>Not available until</strong> May 13 at 12:00am | 
-              <strong>Due</strong> May 19 at 11:59pm | 100 pts
-            </div>
-          </a>
-          <span style={{ marginLeft: "10px", color: "#888" }}>⋮</span>
-        </li>
-
-        <li 
-          className="wd-assignment-list-item"
-          style={{ 
-            padding: "10px", 
-            border: "1px solid #ccc", 
-            borderLeft: "4px solid green",
-            marginBottom: "8px", 
-            borderRadius: "4px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
-        >
-          <a 
-            href="#/Kambaz/Courses/1234/Assignments/125" 
-            className="wd-assignment-link"
-            style={{ textDecoration: "none", color: "green", fontWeight: "bold" }}
-          >
-            A3 - JAVASCRIPT + REACT
-            <div style={{ fontSize: '0.8em', color: '#555', fontWeight: 'normal' }}>
-              Multiple Modules | <strong>Not available until</strong> May 20 at 12:00am | 
-              <strong>Due</strong> May 26 at 11:59pm | 100 pts
-            </div>
-          </a>
-          <span style={{ marginLeft: "10px", color: "#888" }}>⋮</span>
-        </li>
-      </ul>
+      <ListGroup variant="flush" id="wd-assignments-list-group" className="border border-gray rounded-2">
+        <ListGroup.Item className="p-3 bg-light fw-bold d-flex justify-content-between align-items-center">
+          <div>
+            <BsGripVertical className="me-2" />
+            ASSIGNMENTS
+            <span className="badge bg-secondary ms-2 rounded-pill">40% of Total</span>
+          </div>
+          <div>
+            <Button variant="light" size="sm" className="border me-1"><FaPlus /></Button>
+            <Button variant="light" size="sm" className="border"><FaEllipsisV /></Button>
+          </div>
+        </ListGroup.Item>
+        <div id="wd-assignment-list">
+          {assignments.map((assignment) => (
+            <ListGroup.Item key={assignment._id} className="wd-assignment-list-item p-3 d-flex align-items-center">
+              <BsGripVertical className="me-3 text-secondary" />
+              <div className="flex-grow-1">
+                <Link
+                  to={`/Kambaz/Courses/1234/Assignments/${assignment._id}`}
+                  className="wd-assignment-link text-decoration-none text-dark fw-bold"
+                >
+                  {assignment.title}
+                </Link>
+                <div className="text-muted small">
+                  {assignment.multipleModules ? "Multiple Modules | " : ""}
+                  <strong>Not available until</strong> {assignment.available} |
+                  <strong> Due</strong> {assignment.due} | {assignment.points} pts
+                </div>
+              </div>
+              <Button variant="light" size="sm" className="border ms-2"><FaEllipsisV /></Button>
+            </ListGroup.Item>
+          ))}
+        </div>
+      </ListGroup>
     </div>
   );
 }

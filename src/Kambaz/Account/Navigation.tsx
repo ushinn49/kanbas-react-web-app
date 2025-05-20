@@ -1,13 +1,27 @@
-import { Link } from "react-router-dom";
-export default function KambazNavigation() {
+import { Link, useLocation } from "react-router-dom";
+import { ListGroup } from "react-bootstrap";
+
+export default function AccountNavigation() {
+  const location = useLocation();
+  const links = [
+    { name: "Signin", path: "/Kambaz/Account/Signin" },
+    { name: "Signup", path: "/Kambaz/Account/Signup" },
+    { name: "Profile", path: "/Kambaz/Account/Profile" },
+  ];
+
   return (
-    <div id="wd-kambaz-navigation">
-      <a href="https://www.northeastern.edu/" id="wd-neu-link" target="_blank">Northeastern</a><br/>
-      <Link to="/Kambaz/Account" id="wd-account-link">Account</Link><br/>
-      <Link to="/Kambaz/Dashboard" id="wd-dashboard-link">Dashboard</Link><br/>
-      <Link to="/Kambaz/Dashboard" id="wd-course-link">Courses</Link><br/>
-      <Link to="/Kambaz/Calendar" id="wd-calendar-link">Calendar</Link><br/>
-      <Link to="/Kambaz/Inbox" id="wd-inbox-link">Inbox</Link><br/>
-      <Link to="/Labs" id="wd-labs-link">Labs</Link><br/>
-    </div>
-);}
+    <ListGroup id="wd-account-navigation" className="wd-kanbas-navigation list-group fs-5 rounded-0" style={{minWidth: "200px"}}>
+      {links.map((link) => (
+        <ListGroup.Item
+          key={link.path}
+          as={Link}
+          to={link.path}
+          active={location.pathname.includes(link.path)}
+          className={`list-group-item ${location.pathname.includes(link.path) ? "active" : "text-danger border-0"}`}
+        >
+          {link.name}
+        </ListGroup.Item>
+      ))}
+    </ListGroup>
+  );
+}
