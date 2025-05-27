@@ -1,0 +1,236 @@
+[
+  {
+    "_id": "M101",
+    "name": "Introduction to Rocket Propulsion",
+    "description": "Basic principles of rocket propulsion and types of rocket engines.",
+    "course": "RS101",
+    "lessons": [
+      {
+        "_id": "L101",
+        "name": "History of Rocketry",
+        "description": "A brief history of rocket development and space exploration.",
+        "module": "M101"
+      },
+      {
+        "_id": "L102",
+        "name": "Rocket Propulsion Fundamentals",
+        "description": "Basic principles of rocket propulsion, Newton's third law, and rocket equation.",
+        "module": "M101"
+      },
+      {
+        "_id": "L103",
+        "name": "Rocket Engine Types",
+        "description": "Overview of different types of rocket engines.",
+        "module": "M101"
+      }
+    ]
+  },
+  {
+    "_id": "M102",
+    "name": "Fuel and Combustion",
+    "description": "Understanding rocket fuel types and combustion processes.",
+    "course": "RS101",
+    "lessons": [
+      {
+        "_id": "L201",
+        "name": "Liquid Propellants",
+        "description": "Properties and types of liquid rocket propellants.",
+        "module": "M102"
+      },
+      {
+        "_id": "L202",
+        "name": "Solid Propellants",
+        "description": "Composition and characteristics of solid rocket propellants.",
+        "module": "M102"
+      },
+      {
+        "_id": "L203",
+        "name": "Combustion Chemistry",
+        "description": "Chemical reactions in rocket combustion chambers.",
+        "module": "M102"
+      }
+    ]
+  },
+  {
+    "_id": "M103",
+    "name": "Nozzle Design",
+    "description": "Principles of rocket nozzle design and performance.",
+    "course": "RS101",
+    "lessons": [
+      {
+        "_id": "L301",
+        "name": "Nozzle Theory",
+        "description": "Theoretical principles of converging-diverging nozzles.",
+        "module": "M103"
+      },
+      {
+        "_id": "L302",
+        "name": "Nozzle Types",
+        "description": "Different types of rocket nozzles and their applications.",
+        "module": "M103"
+      },
+      {
+        "_id": "L303",
+        "name": "Nozzle Performance",
+        "description": "Performance metrics and optimization of rocket nozzles.",
+        "module": "M103"
+      }
+    ]
+  },
+  {
+    "_id": "M201",
+    "name": "Fundamentals of Aerodynamics",
+    "description": "Basic principles of aerodynamics and fluid flow.",
+    "course": "RS102",
+    "lessons": [
+      {
+        "_id": "L101",
+        "name": "Introduction to Fluid Dynamics",
+        "description": "Basic concepts of fluid dynamics and flow properties.",
+        "module": "M201"
+      },
+      {
+        "_id": "L102",
+        "name": "Continuity and Momentum Equations",
+        "description": "Fundamental equations governing fluid flow.",
+        "module": "M201"
+      },
+      {
+        "_id": "L103",
+        "name": "Bernoulli's Principle",
+        "description": "Understanding Bernoulli's equation and its applications.",
+        "module": "M201"
+      }
+    ]
+  },
+  {
+    "_id": "M202",
+    "name": "Airfoil Theory",
+    "description": "Study of airfoil shapes and their aerodynamic properties.",
+    "course": "RS102",
+    "lessons": [
+      {
+        "_id": "L201",
+        "name": "Airfoil Geometry",
+        "description": "Understanding airfoil nomenclature and design parameters.",
+        "module": "M202"
+      },
+      {
+        "_id": "L202",
+        "name": "Lift Generation",
+        "description": "Mechanisms of lift generation in airfoils.",
+        "module": "M202"
+      },
+      {
+        "_id": "L203",
+        "name": "Drag Forces",
+        "description": "Types of drag and drag reduction techniques.",
+        "module": "M202"
+      }
+    ]
+  },
+  {
+    "_id": "M203",
+    "name": "Compressible Flow",
+    "description": "Aerodynamics of high-speed compressible flows.",
+    "course": "RS102",
+    "lessons": [
+      {
+        "_id": "L301",
+        "name": "Speed of Sound",
+        "description": "Understanding the speed of sound and Mach number.",
+        "module": "M203"
+      },
+      {
+        "_id": "L302",
+        "name": "Shock Waves",
+        "description": "Formation and properties of shock waves.",
+        "module": "M203"
+      },
+      {
+        "_id": "L303",
+        "name": "Supersonic Flow",
+        "description": "Characteristics of supersonic flow over bodies.",
+        "module": "M203"
+      }
+    ]
+  },
+  {
+    "_id": "M301",
+    "name": "Spacecraft Systems Overview",
+    "description": "Introduction to spacecraft subsystems and their integration.",
+    "course": "RS103",
+    "lessons": [
+      {
+        "_id": "L101",
+        "name": "Mission Analysis",
+        "description": "Defining mission requirements and constraints.",
+        "module": "M301"
+      },
+      {
+        "_id": "L102",
+        "name": "Spacecraft Bus",
+        "description": "Overview of spacecraft bus architecture.",
+        "module": "M301"
+      },
+      {
+        "_id": "L103",
+        "name": "System Integration",
+        "description": "Integrating spacecraft subsystems.",
+        "module": "M301"
+      }
+    ]
+  },
+  {
+    "_id": "M302",
+    "name": "Structural Design",
+    "description": "Spacecraft structural design and analysis.",
+    "course": "RS103",
+    "lessons": [
+      {
+        "_id": "L201",
+        "name": "Structural Requirements",
+        "description": "Understanding structural loads and requirements.",
+        "module": "M302"
+      },
+      {
+        "_id": "L202",
+        "name": "Materials Selection",
+        "description": "Selecting materials for spacecraft structures.",
+        "module": "M302"
+      },
+      {
+        "_id": "L203",
+        "name": "Structural Analysis",
+        "description": "Methods for analyzing spacecraft structures.",
+        "module": "M302"
+      }
+    ]
+  },
+  {
+    "_id": "M303",
+    "name": "Power Systems",
+    "description": "Spacecraft power generation and management.",
+    "course": "RS103",
+    "lessons": [
+      {
+        "_id": "L301",
+        "name": "Solar Arrays",
+        "description": "Design and operation of spacecraft solar arrays.",
+        "module": "M303"
+      },
+      {
+        "_id": "L302",
+        "name": "Batteries",
+        "description": "Spacecraft battery systems and energy storage.",
+        "module": "M303"
+      },
+      {
+        "_id": "L303",
+        "name": "Power Distribution",
+        "description": "Power distribution and management systems.",
+        "module": "M303"
+      }
+    ]
+  }
+]
