@@ -1,17 +1,16 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Labs from "./Labs";
+import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 import Kambaz from "./Kambaz";
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/Labs" />} />
-        <Route path="/Labs/*" element={<Labs />} />
-        <Route path="/Kambaz/*" element={<Kambaz />} />
-      </Routes>
-    </Router>
-  );
-}
+export default function App() {
+return (
+<HashRouter>
+<div>
+<Routes>
+<Route path="/" element={<Navigate to="Kambaz" />} />
+<Route path="/Labs/*" element={<Labs />} />
+<Route path="/Kambaz/*" element={<Kambaz />} />
 
-export default App;
+</Routes>
+</div>
+</HashRouter> );}
