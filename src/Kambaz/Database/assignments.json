@@ -1,92 +1,11 @@
 [
-  {
-    "_id": "A101",
-    "title": "Propellant Efficiency Analysis",
-    "course": "RS101",
-    "description": "Analyze the efficiency of different propellant combinations",
-    "points": 100,
-    "dueDate": "2024-05-13",
-    "availableDate": "2024-05-06",
-    "untilDate": "2024-05-20"
-  },
-  {
-    "_id": "A102",
-    "title": "Combustion Chamber Design",
-    "course": "RS101",
-    "description": "Design a combustion chamber for a specific mission profile",
-    "points": 100,
-    "dueDate": "2024-05-20",
-    "availableDate": "2024-05-13",
-    "untilDate": "2024-05-27"
-  },
-  {
-    "_id": "A103",
-    "title": "Nozzle Performance Calculations",
-    "course": "RS101",
-    "description": "Calculate nozzle performance under various conditions",
-    "points": 100,
-    "dueDate": "2024-05-27",
-    "availableDate": "2024-05-20",
-    "untilDate": "2024-06-03"
-  },
-  {
-    "_id": "A201",
-    "title": "Airfoil Analysis",
-    "course": "RS102",
-    "description": "Analyze the aerodynamic properties of various airfoil shapes",
-    "points": 100,
-    "dueDate": "2024-05-13",
-    "availableDate": "2024-05-06",
-    "untilDate": "2024-05-20"
-  },
-  {
-    "_id": "A202",
-    "title": "Wind Tunnel Testing Report",
-    "course": "RS102",
-    "description": "Conduct wind tunnel tests and analyze results",
-    "points": 100,
-    "dueDate": "2024-05-20",
-    "availableDate": "2024-05-13",
-    "untilDate": "2024-05-27"
-  },
-  {
-    "_id": "A203",
-    "title": "CFD Simulation Project",
-    "course": "RS102",
-    "description": "Perform CFD analysis of a supersonic flow problem",
-    "points": 100,
-    "dueDate": "2024-05-27",
-    "availableDate": "2024-05-20",
-    "untilDate": "2024-06-03"
-  },
-  {
-    "_id": "A301",
-    "title": "Mission Requirements Document",
-    "course": "RS103",
-    "description": "Define mission requirements for a satellite project",
-    "points": 100,
-    "dueDate": "2024-05-13",
-    "availableDate": "2024-05-06",
-    "untilDate": "2024-05-20"
-  },
-  {
-    "_id": "A302",
-    "title": "Structural Design Project",
-    "course": "RS103",
-    "description": "Design the structure for a small satellite",
-    "points": 100,
-    "dueDate": "2024-05-20",
-    "availableDate": "2024-05-13",
-    "untilDate": "2024-05-27"
-  },
-  {
-    "_id": "A303",
-    "title": "Power Budget Analysis",
-    "course": "RS103",
-    "description": "Develop a power budget for spacecraft mission",
-    "points": 100,
-    "dueDate": "2024-05-27",
-    "availableDate": "2024-05-20",
-    "untilDate": "2024-06-03"
-  }
+  { "_id": "A101", "title": "Propulsion Assignment", "course": "RS101" },
+  { "_id": "A102", "title": "Combustion Analysis", "course": "RS101" },
+  { "_id": "A103", "title": "Nozzle Design Project", "course": "RS101" },
+  { "_id": "A201", "title": "Aerodynamics Quiz", "course": "RS102" },
+  { "_id": "A202", "title": "Flow Analysis", "course": "RS102" },
+  { "_id": "A203", "title": "Heating Analysis", "course": "RS102" },
+  { "_id": "A301", "title": "Structural Design Task", "course": "RS103" },
+  { "_id": "A302", "title": "Orbital Calculations", "course": "RS103" },
+  { "_id": "A303", "title": "Systems Engineering Exam", "course": "RS103" }
 ]
