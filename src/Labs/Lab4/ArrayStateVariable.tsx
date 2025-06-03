@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Button, ListGroup, FormControl } from "react-bootstrap"; // Assuming Bootstrap
+import { Button, ListGroup, FormControl } from "react-bootstrap";
 
 export default function ArrayStateVariable() {
   const [array, setArray] = useState([1, 2, 3, 4, 5]);
-  const [element, setElement] = useState(0); // For adding a specific element
+  const [element, setElement] = useState(0); 
 
   const addElement = () => {
-    // Using the 'element' state variable to add a new number
+
     setArray([...array, element]);
-    setElement(0); // Reset input field
+    setElement(0); 
   };
   
   const addRandomElement = () => {
@@ -16,7 +16,7 @@ export default function ArrayStateVariable() {
   };
 
   const deleteElement = (index: number) => {
-    setArray(array.filter((item, i) => i !== index));
+    setArray(array.filter((i) => i !== index));
   };
 
   return (
