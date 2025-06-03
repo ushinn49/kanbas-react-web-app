@@ -1,79 +1,99 @@
-import { useNavigate } from "react-router-dom"; 
-import { Form, Button, Container, Col, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentUser } from "./reducer";
 
 export default function Profile() {
-  const navigate = useNavigate(); 
+  const [profile, setProfile] = useState<any>({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
-  const handleSignOut = () => {
-
-    navigate("/Kambaz/Account/Signin"); 
+  const fetchProfile = () => {
+    if (!currentUser) return navigate("/Kambaz/Account/Signin");
+    setProfile(currentUser);
   };
 
+  const signout = () => {
+    dispatch(setCurrentUser(null));
+    navigate("/Kambaz/Account/Signin");
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
   return (
-    <Container id="wd-profile-screen" style={{ maxWidth: "600px" }} className="mt-5">
-      <h1 className="text-center mb-4">Profile</h1>
-      <Form>
-        <Form.Group as={Row} className="mb-3" controlId="wd-username-profile">
-          <Form.Label column sm={3}>Username</Form.Label>
-          <Col sm={9}>
-            <Form.Control type="text" defaultValue="alice" className="wd-username"/>
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3" controlId="wd-password-profile">
-          <Form.Label column sm={3}>Password</Form.Label>
-          <Col sm={9}>
-            <Form.Control type="password" defaultValue="123" className="wd-password"/>
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3" controlId="wd-firstname">
-          <Form.Label column sm={3}>First Name</Form.Label>
-          <Col sm={9}>
-            <Form.Control type="text" defaultValue="Alice" />
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3" controlId="wd-lastname">
-          <Form.Label column sm={3}>Last Name</Form.Label>
-          <Col sm={9}>
-            <Form.Control type="text" defaultValue="Wonderland" />
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3" controlId="wd-dob">
-          <Form.Label column sm={3}>Date of Birth</Form.Label>
-          <Col sm={9}>
-            <Form.Control type="date" defaultValue="2000-01-01" />
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3" controlId="wd-email-profile">
-          <Form.Label column sm={3}>Email</Form.Label>
-          <Col sm={9}>
-            <Form.Control type="email" defaultValue="alice@wonderland.com" id="wd-email"/>
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3" controlId="wd-role">
-          <Form.Label column sm={3}>Role</Form.Label>
-          <Col sm={9}>
-            <Form.Select defaultValue="FACULTY">
-              <option value="USER">User</option>
-              <option value="ADMIN">Admin</option>
-              <option value="FACULTY">Faculty</option>
-              <option value="STUDENT">Student</option>
-            </Form.Select>
-          </Col>
-        </Form.Group>
-        
-        <div className="d-grid gap-2 mt-4">
-            <Button variant="primary">Update</Button>
-            <Button variant="danger" onClick={handleSignOut}>
-             Sign Out
-            </Button>
+    <div className="wd-profile-screen">
+      <h3>Profile</h3>
+      {profile && (
+        <div>
+          <input
+            value={profile.username}
+            id="wd-username"
+            className="form-control mb-2"
+            onChange={(e) =>
+              setProfile({ ...profile, username: e.target.value })
+            }
+          />
+          <input
+            value={profile.password}
+            id="wd-password"
+            className="form-control mb-2"
+            onChange={(e) =>
+              setProfile({ ...profile, password: e.target.value })
+            }
+          />
+          <input
+            value={profile.firstName}
+            id="wd-firstname"
+            className="form-control mb-2"
+            onChange={(e) =>
+              setProfile({ ...profile, firstName: e.target.value })
+            }
+          />
+          <input
+            value={profile.lastName}
+            id="wd-lastname"
+            className="form-control mb-2"
+            onChange={(e) =>
+              setProfile({ ...profile, lastName: e.target.value })
+            }
+          />
+          <input
+            value={profile.dob}
+            id="wd-dob"
+            className="form-control mb-2"
+            onChange={(e) => setProfile({ ...profile, dob: e.target.value })}
+            type="date"
+          />
+          <input
+            value={profile.email}
+            id="wd-email"
+            className="form-control mb-2"
+            onChange={(e) =>
+              setProfile({ ...profile, email: e.target.value })
+            }
+          />
+          <select
+            onChange={(e) => setProfile({ ...profile, role: e.target.value })}
+            className="form-control mb-2"
+            id="wd-role"
+          >
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+            <option value="FACULTY">Faculty</option>
+            <option value="STUDENT">Student</option>
+          </select>
+          <button
+            onClick={signout}
+            className="btn btn-danger w-100 mb-2"
+            id="wd-signout-btn"
+          >
+            Sign out
+          </button>
         </div>
-      </Form>
-    </Container>
+      )}
+    </div>
   );
 }

@@ -1,34 +1,24 @@
-.wd-kambaz-content {
-  margin-left: 120px;
+.wd-kambaz-navigation {
+  width: 110px;
+  position: fixed;
+  height: 100vh;
+  z-index: 1000;
+  background-color: black;
+}
+
+.wd-main-content-offset {
+  margin-left: 110px;
   padding: 20px;
-  min-height: 100vh;
 }
 
 @media (max-width: 768px) {
-  .wd-kambaz-content {
+  .wd-kambaz-navigation {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .wd-main-content-offset {
     margin-left: 0;
   }
-}
-
-.wd-courses-navigation {
-  width: 150px;
-  margin-right: 20px;
-}
-
-.wd-module {
-  margin-bottom: 20px;
-}
-
-.wd-dashboard-course-title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.wd-dashboard-course-description {
-  overflow: hidden;
-  display: -webkit-box;
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
 }

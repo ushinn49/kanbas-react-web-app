@@ -1,39 +1,42 @@
+import ModuleEditor from "./ModuleEditor";
 import { FaPlus } from "react-icons/fa6";
-import GreenCheckmark from "./GreenCheckmark";
-import { Button, Dropdown } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { useState } from "react";
 
-export default function ModulesControls() {
+export default function ModulesControls({
+  moduleName,
+  setModuleName,
+  addModule
+}: {
+  moduleName: string;
+  setModuleName: (title: string) => void;
+  addModule: () => void;
+}) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div id="wd-modules-controls" className="text-nowrap">
-      <Button variant="secondary" size="lg" className="me-1 float-end" id="wd-add-module-btn">
+      <Button variant="danger" onClick={handleShow}>
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Module
       </Button>
-      <Dropdown className="float-end me-2">
-        <Dropdown.Toggle variant="secondary" size="lg" id="wd-publish-all-btn">
-          <GreenCheckmark /> Publish All
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item id="wd-publish-all-modules-and-items-option">
-            <GreenCheckmark /> Publish all modules and items
-          </Dropdown.Item>
-          <Dropdown.Item id="wd-publish-modules-only-option">
-            <GreenCheckmark /> Publish modules only
-          </Dropdown.Item>
-          <Dropdown.Item id="wd-unpublish-all-modules-and-items-option">
-            <GreenCheckmark /> Unpublish all modules and items
-          </Dropdown.Item>
-          <Dropdown.Item id="wd-unpublish-modules-only-option">
-            <GreenCheckmark /> Unpublish modules only
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-      <Button variant="secondary" size="lg" className="me-1 float-end" id="wd-view-progress-btn">
-        View Progress
+      <Button variant="secondary" className="ms-1">
+        <FaPlus
+          className="position-relative me-2"
+          style={{ bottom: "1px" }}
+        />
+        Assignment
       </Button>
-      <Button variant="secondary" size="lg" className="me-1 float-end" id="wd-collapse-all-btn">
-        Collapse All
-      </Button>
+      <ModuleEditor
+        show={show}
+        handleClose={handleClose}
+        dialogTitle="Add Module"
+        moduleName={moduleName}
+        setModuleName={setModuleName}
+        addModule={addModule}
+      />
     </div>
   );
 }

@@ -19,7 +19,6 @@ import FindIndex from "./FindIndex";
 import FilterFunction from "./FilterFunction";
 import JsonStringify from "./JsonStringify";
 import House from "./House";
-import TodoList from "./todos/TodoList";
 import Spreading from "./Spreading";
 import Destructing from "./Destructing";
 import FunctionDestructing from "./FunctionDestructing";
@@ -30,49 +29,65 @@ import Add from "./Add";
 import Square from "./Square";
 import Highlight from "./Highlight";
 import PathParameters from "./PathParameters";
+import { useSelector } from "react-redux";
+import { ListGroup } from "react-bootstrap";
+import type { TodoType } from "../Lab4/ReduxExamples/todos/todosReducer";
+
+interface RootState {
+  todosReducer: {
+    todos: TodoType[];
+  };
+}
 
 export default function Lab3() {
-  console.log('Hello World!');
+  const { todos } = useSelector((state: RootState) => state.todosReducer);
   return (
-    <div id="wd-lab3">
+    <div id="wd-lab3" className="container-fluid">
       <h3>Lab 3</h3>
-      <VariablesAndConstants/>
-      <VariableTypes/>
-      <BooleanVariables/>
-      <IfElse/>
-      <TernaryOperator/>
-      <ConditionalOutputIfElse/>
-      <ConditionalOutputInline/>
-      <LegacyFunctions/>
-      <ArrowFunctions/>
-      <ImpliedReturn/>
-      <TemplateLiterals/>
-      <SimpleArrays/>
-      <ArrayIndexAndLength/>
-      <AddingAndRemovingToFromArrays/>
-      <ForLoops/>
-      <MapFunction/>
-      <FindFunction/>
-      <FindIndex/>
-      <FilterFunction/>
-      <JsonStringify/>
-      <House/>
-      <TodoList/>
-      <Spreading/>
-      <Destructing/>
-      <FunctionDestructing/>
-      <DestructingImports/>
-      <Classes/>
-      <Styles/>
-      <Add a={3} b={4}/>
+      <VariablesAndConstants />
+      <VariableTypes />
+      <BooleanVariables />
+      <IfElse />
+      <TernaryOperator />
+      <ConditionalOutputIfElse />
+      <ConditionalOutputInline />
+      <LegacyFunctions />
+      <ArrowFunctions />
+      <ImpliedReturn />
+      <TemplateLiterals />
+      <SimpleArrays />
+      <ArrayIndexAndLength />
+      <AddingAndRemovingToFromArrays />
+      <ForLoops />
+      <MapFunction />
+      <JsonStringify />
+      <FindFunction />
+      <FindIndex />
+      <FilterFunction />
+      <House />
+      <Spreading />
+      <Destructing />
+      <FunctionDestructing />
+      <DestructingImports />
+      <Classes />
+      <Styles />
+      <Add a={3} b={4} />
       <h4>Square of 4</h4>
       <Square>4</Square>
-      <hr/>
+      <hr />
       <Highlight>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipitratione eaque illo minus cum, saepe totam
-        vel nihil repellat nemo explicabo excepturi consectetur. Modi omnis minus sequi maiores, provident voluptates.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipitratione
+        eaque illo minus cum, saepe totam vel nihil repellat nemo explicabo
+        excepturi consectetur. Modi omnis minus sequi maiores, provident
+        voluptates.
       </Highlight>
-      <PathParameters/>
+      <PathParameters />
+      <h3>Todos from Redux Store</h3>
+      <ListGroup>
+        {todos.map((todo: TodoType) => (
+          <ListGroup.Item key={todo.id}>{todo.title}</ListGroup.Item>
+        ))}
+      </ListGroup>
     </div>
   );
 }
