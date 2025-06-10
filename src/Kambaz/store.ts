@@ -11,8 +11,11 @@ const store = configureStore({
     accountReducer,
     assignmentsReducer,
     coursesReducer,
-    enrollmentsReducer
-  }
+    enrollmentsReducer,
+  },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

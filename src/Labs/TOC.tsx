@@ -24,18 +24,37 @@ export default function TOC() {
           Lab 3
         </Nav.Link>
       </Nav.Item>
+      <Nav.Item>
         <Nav.Link as={Link} to="/Labs/Lab4" id="wd-a4"
           active={pathname.includes("Lab4")}>
           Lab 4
         </Nav.Link>
+      </Nav.Item>
       <Nav.Item>
-        <Nav.Link as={Link} to="/Kambaz" id="wd-a3">
+        <Nav.Link as={Link} to="/Labs/Lab5" id="wd-a5"
+          active={pathname.includes("Lab5")}>
+          Lab 5
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link as={Link} to="/Kambaz" id="wd-kambaz"
+          active={pathname.includes("/Kambaz")}>
           Kambaz
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link href="https://github.com/ushinn49/kanbas-react-web-app" target="_blank" id="wd-github">
-          My GitHub
+        <Nav.Link href="https://github.com/ushinn49/kanbas-react-web-app" target="_blank" id="wd-github-client">
+          Client Repo
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="https://github.com/ushinn49/kambaz-node-server-app" target="_blank" id="wd-github-server">
+          Server Repo
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="https://kambaz-node-server-app-l5ut.onrender.com" target="_blank" id="wd-render-live">
+          Server Live
         </Nav.Link>
       </Nav.Item>
     </Nav>
