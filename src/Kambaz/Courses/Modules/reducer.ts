@@ -1,13 +1,12 @@
-import { createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { type PayloadAction } from "@reduxjs/toolkit";
 import { type Module } from "../../Database";
-
+import { v4 as uuidv4 } from "uuid";
 
 interface ModulesState {
   modules: Module[];
   module: Module;
 }
-
 
 const initialState: ModulesState = {
   modules: [],
@@ -18,13 +17,15 @@ const modulesSlice = createSlice({
   name: "modules",
   initialState,
   reducers: {
-
     setModules: (state, action: PayloadAction<Module[]>) => {
       state.modules = action.payload;
     },
-
-    addModule: (state, action: PayloadAction<Module>) => {
-      state.modules = [action.payload, ...state.modules];
+    addModule: (state, { payload: module }) => { 
+      const newModule: Module = {
+        _id: uuidv4(),
+        ...module,
+      };
+      state.modules = [newModule, ...state.modules];
     },
     deleteModule: (state, action: PayloadAction<string>) => {
       state.modules = state.modules.filter(
@@ -36,17 +37,15 @@ const modulesSlice = createSlice({
         m._id === action.payload._id ? action.payload : m
       );
     },
-
     setModule: (state, action: PayloadAction<Module>) => {
-        state.module = action.payload;
+      state.module = action.payload;
     },
-
     editModule: (state, action: PayloadAction<string>) => {
       const moduleId = action.payload;
       state.modules = state.modules.map((m) =>
         m._id === moduleId ? { ...m, editing: true } : m
       );
-    }
+    },
   },
 });
 

@@ -6,6 +6,7 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import { FaAlignJustify } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import PeopleTable from "./People/Table";
 
 export default function Courses() {
   const { cid } = useParams();
@@ -30,7 +31,7 @@ export default function Courses() {
             <Route path="Modules" element={<Modules />} />
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:aid" element={<AssignmentEditor />} />
-            <Route path="People" element={<h2>People</h2>} />
+            <Route path="People" element={<PeopleTable />} /> 
           </Routes>
         </div>
       </div>

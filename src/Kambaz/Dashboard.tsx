@@ -8,6 +8,7 @@ import { Button, Card, Col, Container, Form, FormControl, Row } from "react-boot
 import { FaEdit, FaTrashAlt, FaPlusCircle } from 'react-icons/fa';
 import type { Course } from './Database';
 
+
 export default function Dashboard() {
   const { courses, course } = useSelector((state: RootState) => state.coursesReducer);
   const dispatch: AppDispatch = useDispatch();
