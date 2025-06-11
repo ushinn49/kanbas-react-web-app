@@ -1,22 +1,12 @@
 import { useSelector } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-export default function ProtectedCourseRoute({ children }: { children: any }) {
+export default function ProtectedRoute({ children }: { children: any }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
-  const { cid } = useParams();
-  
-  if (!currentUser) {
+
+  if (currentUser) {
+    return children; 
+  } else {
     return <Navigate to="/Kambaz/Account/Signin" />;
   }
-  
-  const isEnrolled = enrollments.some(
-    (e: any) => e.user === currentUser._id && e.course === cid
-  );
-  
-  if (!isEnrolled) {
-    return <Navigate to="/Kambaz/Dashboard" />;
-  }
-  
-  return children;
 }

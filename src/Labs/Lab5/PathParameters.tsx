@@ -1,28 +1,40 @@
 import { useState } from "react";
-import { FormControl } from "react-bootstrap";
+import { FormControl, Button, Alert } from "react-bootstrap";
+import axios from "axios";
 
 const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 
 export default function PathParameters() {
   const [a, setA] = useState("34");
   const [b, setB] = useState("23");
+  const [result, setResult] = useState<string | null>(null);
+
+  const fetchSum = async () => {
+    const response = await axios.get(`${REMOTE_SERVER}/lab5/add/${a}/${b}`);
+    setResult(response.data.toString());
+  };
+
+  const fetchDiff = async () => {
+    const response = await axios.get(`${REMOTE_SERVER}/lab5/subtract/${a}/${b}`);
+    setResult(response.data.toString());
+  };
+
   return (
     <div>
       <h3>Path Parameters</h3>
-      <FormControl className="mb-2" id="wd-path-parameter-a" type="number" value={a} onChange={(e) => setA(e.target.value)} />
-      <FormControl className="mb-2" id="wd-path-parameter-b" type="number" value={b} onChange={(e) => setB(e.target.value)} />
-      <a className="btn btn-primary me-2" id="wd-path-parameter-add" href={`${REMOTE_SERVER}/lab5/add/${a}/${b}`}>
+      <FormControl className="mb-2" type="number" value={a} onChange={(e) => setA(e.target.value)} />
+      <FormControl className="mb-2" type="number" value={b} onChange={(e) => setB(e.target.value)} />
+      <Button onClick={fetchSum} className="btn btn-primary me-2">
         Add {a} + {b}
-      </a>
-      <a className="btn btn-danger me-2" id="wd-path-parameter-subtract" href={`${REMOTE_SERVER}/lab5/subtract/${a}/${b}`}>
+      </Button>
+      <Button onClick={fetchDiff} className="btn btn-danger">
         Subtract {a} - {b}
-      </a>
-      <a className="btn btn-success me-2" id="wd-path-parameter-multiply" href={`${REMOTE_SERVER}/lab5/multiply/${a}/${b}`}>
-        Multiply {a} * {b}
-      </a>
-      <a className="btn btn-warning" id="wd-path-parameter-divide" href={`${REMOTE_SERVER}/lab5/divide/${a}/${b}`}>
-        Divide {a} / {b}
-      </a>
+      </Button>
+      {result && (
+        <Alert variant="success" className="mt-2">
+          Result: {result}
+        </Alert>
+      )}
       <hr />
     </div>
   );
