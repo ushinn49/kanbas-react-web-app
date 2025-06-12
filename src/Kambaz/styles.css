@@ -1,0 +1,24 @@
+.wd-kambaz-navigation {
+  width: 110px;
+  position: fixed;
+  height: 100vh;
+  z-index: 1000;
+  background-color: black;
+}
+
+.wd-main-content-offset {
+  margin-left: 110px;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .wd-kambaz-navigation {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .wd-main-content-offset {
+    margin-left: 0;
+  }
+}
