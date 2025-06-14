@@ -131,7 +131,7 @@ export default function Dashboard() {
                 to={`/Kambaz/Courses/${course._id}/Home`}
                 className="wd-dashboard-course-link"
               >
-                <img src="/src/images/reactjs.jpg" width={200} />
+                <img src="/images/reactjs.jpg" width={200} />
                 <div>
                   <h5>
                     {course.number} {course.name}
