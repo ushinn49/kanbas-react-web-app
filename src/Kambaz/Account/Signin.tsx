@@ -1,68 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as client from "./client";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import * as client from "./client";
 import { setCurrentUser } from "./reducer";
-import { FormControl, Button, Form, Alert } from "react-bootstrap";
 
 export default function Signin() {
-  const [credentials, setCredentials] = useState({ username: "", password: "" });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-
-  const signin = async () => {
-    setError(null);
+  const handleSignin = async () => {
     try {
-      const user = await client.signin(credentials);
-      if (user) {
-        dispatch(setCurrentUser(user));
-        navigate("/Kambaz/Dashboard");
-      }
-    } catch (err: any) {
-      if (err.response && err.response.data) {
-        setError(err.response.data.message);
-      } else {
-        setError("An unknown error occurred during sign-in.");
-      }
+      setError(null);
+      const currentUser = await client.signin({ username, password });
+      dispatch(setCurrentUser(currentUser));
+      navigate("/Kambaz/Dashboard");
+    } catch (e: any) {
+      const msg = e?.response?.data?.message || "登录失败，请稍后再试";
+      setError(msg);
     }
   };
 
   return (
-    <div id="wd-signin-screen" className="container mt-5" style={{ maxWidth: "400px" }}>
-      <h1>Sign in</h1>
-      {error && <Alert variant="danger">{error}</Alert>}
-      <Form>
-        <FormControl
-          name="username"
-          placeholder="username"
-          className="form-control mb-2"
-          id="wd-username"
-          value={credentials.username}
-          onChange={handleInputChange}
-        />
-        <FormControl
-          name="password"
-          placeholder="password"
-          type="password"
-          className="form-control mb-2"
-          id="wd-password"
-          value={credentials.password}
-          onChange={handleInputChange}
-        />
-        <Button onClick={signin} id="wd-signin-btn" className="btn btn-primary w-100">
-          Sign in
-        </Button>
-        <div className="text-center mt-2">
-            <Link id="wd-signup-link" to="/Kambaz/Account/Signup">
-                Sign up
-            </Link>
-        </div>
-      </Form>
+    <div id="wd-signin-screen">
+      <h3>Sign in</h3>
+      <input
+        value={username}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+        placeholder="Username"
+        className="wd-username"
+      />
+      <br />
+      <input
+        value={password}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+        placeholder="Password"
+        type="password"
+        className="wd-password"
+      />
+      <br />
+      <button id="wd-signin-btn" onClick={handleSignin} className="btn btn-primary">
+        Sign in
+      </button>
+      {error && <div className="text-danger mt-2">{error}</div>}
+      <br />
+      <Link id="wd-signup-link" to="/Kambaz/Account/Signup">
+        No account? Sign up
+      </Link>
     </div>
   );
 }
