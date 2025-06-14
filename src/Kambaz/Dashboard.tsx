@@ -38,7 +38,7 @@ export default function Dashboard() {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get("http://localhost:4000/api/users/current/courses", {
+      const response = await axios.get(`${userClient.REMOTE_SERVER}/api/users/current/courses`, {
         withCredentials: true
       });
       setCourses(response.data);
