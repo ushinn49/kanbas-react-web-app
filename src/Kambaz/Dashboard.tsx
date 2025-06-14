@@ -1,101 +1,151 @@
-import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import type { RootState, AppDispatch } from "./store";
-import * as coursesClient from "./Courses/client"; // For generic course actions
-import * as userClient from "./Account/client";     // For user-specific actions like create
-import { addCourse, deleteCourse, updateCourse, setCourse } from "./Courses/reducer";
-import { Button, Card, Col, Container, Form, FormControl, Row } from "react-bootstrap";
-import { FaEdit, FaTrashAlt, FaPlusCircle } from 'react-icons/fa';
-import type { Course } from './Database';
-
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import * as userClient from "./Account/client";
+import type { Course } from "./Database";
 
 export default function Dashboard() {
-  const { courses, course } = useSelector((state: RootState) => state.coursesReducer);
-  const dispatch: AppDispatch = useDispatch();
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Handles changes in the form inputs
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch(setCourse({ ...course, [e.target.name]: e.target.value }));
-  };
+  const [newCourse, setNewCourse] = useState({
+    name: "",
+    number: "",
+    startDate: "2023-09-01",
+    endDate: "2023-12-31",
+    description: ""
+  });
 
-  // Handles adding a new course (Fixed)
-  const handleAddNewCourse = async () => {
+  const handleCreateCourse = async () => {
     try {
-      const newCourseFromServer = await userClient.createCourse(course);
-      dispatch(addCourse(newCourseFromServer));
+      const created = await userClient.createCourse(newCourse);
+      setCourses([created, ...courses]);
+      setNewCourse({
+        name: "",
+        number: "",
+        startDate: "2023-09-01",
+        endDate: "2023-12-31",
+        description: ""
+      });
     } catch (err) {
-      console.error("Failed to add course", err);
+      console.error(err);
+      alert("Failed to create course. Please try again later.");
     }
   };
 
-  // Handles updating an existing course (Fixed)
-  const handleUpdateCourse = async () => {
+  const fetchCourses = async () => {
     try {
-      await coursesClient.updateCourse(course);
-      dispatch(updateCourse(course));
-    } catch (err) {
-      console.error("Failed to update course", err);
+      setLoading(true);
+      setError(null);
+      const response = await axios.get("http://localhost:4000/api/users/current/courses", {
+        withCredentials: true
+      });
+      setCourses(response.data);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      setError("Failed to load courses. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Handles deleting a course
-  const handleDeleteCourse = async (courseId: string) => {
-    try {
-      await coursesClient.deleteCourse(courseId);
-      dispatch(deleteCourse(courseId));
-    } catch (err) {
-      console.error("Failed to delete course", err);
-    }
-  };
+  useEffect(() => {
+    fetchCourses();
+  }, []);
 
-  // Loads a course's data into the form for editing
-  const handleEditCourse = (courseToEdit: Course) => {
-    dispatch(setCourse(courseToEdit));
-  };
+  if (loading) {
+    return <div>Loading courses...</div>;
+  }
+
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
 
   return (
-    <Container fluid className="p-4" id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard</h1>
-      <hr />
-      <div className="mb-4 p-3 border rounded">
-        <h5>{course._id && course._id !== "0" ? "Edit Course" : "Add New Course"}</h5>
-        <Form>
-          <Row>
-            <Col md={6} className="mb-2">
-              <FormControl name="name" placeholder="Course Name" value={course.name} onChange={handleInputChange} />
-            </Col>
-            <Col md={6} className="mb-2">
-              <FormControl name="number" placeholder="Course Number" value={course.number} onChange={handleInputChange} />
-            </Col>
-          </Row>
-          {/* ... Other form fields would go here ... */}
-          {course._id && course._id !== "0" ? (
-            <Button variant="warning" onClick={handleUpdateCourse}>Update Course</Button>
-          ) : (
-            <Button variant="primary" onClick={handleAddNewCourse}><FaPlusCircle /> Add Course</Button>
-          )}
-        </Form>
+    <div id="wd-dashboard">
+      <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+
+
+      <div className="border p-3 mb-3">
+        <h4>Create New Course</h4>
+        <div className="row g-2">
+          <div className="col-md-3">
+            <input
+              className="form-control"
+              placeholder="Course Name"
+              value={newCourse.name}
+              onChange={(e) => setNewCourse({ ...newCourse, name: e.target.value })}
+            />
+          </div>
+          <div className="col-md-2">
+            <input
+              className="form-control"
+              placeholder="Course Number"
+              value={newCourse.number}
+              onChange={(e) => setNewCourse({ ...newCourse, number: e.target.value })}
+            />
+          </div>
+          <div className="col-md-2">
+            <input
+              className="form-control"
+              placeholder="Start Date"
+              type="date"
+              value={newCourse.startDate}
+              onChange={(e) => setNewCourse({ ...newCourse, startDate: e.target.value })}
+            />
+          </div>
+          <div className="col-md-2">
+            <input
+              className="form-control"
+              placeholder="End Date"
+              type="date"
+              value={newCourse.endDate}
+              onChange={(e) => setNewCourse({ ...newCourse, endDate: e.target.value })}
+            />
+          </div>
+          <div className="col-md-3">
+            <input
+              className="form-control"
+              placeholder="Description"
+              value={newCourse.description}
+              onChange={(e) => setNewCourse({ ...newCourse, description: e.target.value })}
+            />
+          </div>
+          <div className="col-12 text-end">
+            <button className="btn btn-success" onClick={handleCreateCourse}>
+              Add Course
+            </button>
+          </div>
+        </div>
       </div>
-      
-      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
-      <hr />
-      <Row xs={1} md={2} lg={3} xl={4} className="g-4" id="wd-dashboard-courses">
-        {courses.map((c: Course) => (
-          <Col key={c._id}>
-            <Card className="h-100">
-              {/* ... Card content ... */}
-              <Card.Footer>
-                  <Button variant="outline-warning" size="sm" className="me-2" onClick={() => handleEditCourse(c)}>
-                    <FaEdit /> Edit
-                  </Button>
-                  <Button variant="outline-danger" size="sm" onClick={() => handleDeleteCourse(c._id)}>
-                    <FaTrashAlt /> Delete
-                  </Button>
-              </Card.Footer>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+
+      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
+      <div id="wd-dashboard-courses">
+        {courses.length === 0 ? (
+          <div>No courses found. Please contact your administrator.</div>
+        ) : (
+          courses.map((course) => (
+            <div className="wd-dashboard-course" key={course._id}>
+              <Link 
+                to={`/Kambaz/Courses/${course._id}/Home`}
+                className="wd-dashboard-course-link"
+              >
+                <img src="/src/images/reactjs.jpg" width={200} />
+                <div>
+                  <h5>
+                    {course.number} {course.name}
+                  </h5>
+                  <p className="wd-dashboard-course-title">
+                    {course.description}
+                  </p>
+                  <button> Go </button>
+                </div>
+              </Link>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
   );
 }
