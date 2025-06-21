@@ -11,7 +11,7 @@ export default function KambazNavigation() {
   const links = [
     { label: "Account", path: "/Kambaz/Account", icon: FaRegCircleUser },
     { label: "Dashboard", path: "/Kambaz/Dashboard", icon: AiOutlineDashboard },
-    { label: "Courses", path: "/Kambaz/Dashboard", icon: LiaBookSolid }, // 改为指向Dashboard
+    { label: "Courses", path: "/Kambaz/Courses", icon: LiaBookSolid },
     { label: "Calendar", path: "/Kambaz/Calendar", icon: IoCalendarOutline },
     { label: "Inbox", path: "/Kambaz/Inbox", icon: FaInbox },
     { label: "History", path: "/Kambaz/History", icon: LiaClockSolid },
@@ -33,14 +33,14 @@ export default function KambazNavigation() {
         <img src={neuLogoUrl} width="75px" alt="NEU Logo" />
       </ListGroup.Item>
 
-      {links.map((link) => {
+      {links.map((link, index) => {
         const isActive = pathname.includes(link.path) || 
                         (link.label === "Courses" && pathname.includes("/Courses")) ||
                         (link.label === "Dashboard" && pathname.includes("/Courses"));
         const IconComponent = link.icon;
         return (
           <ListGroup.Item
-            key={link.path}
+            key={`${link.path}-${index}`}
             as={Link}
             to={link.path}
             id={`wd-${link.label.toLowerCase().replace(/\s+/g, '-')}-link`} 

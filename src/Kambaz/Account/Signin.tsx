@@ -19,7 +19,7 @@ export default function Signin() {
       dispatch(setCurrentUser(currentUser));
       navigate("/Kambaz/Dashboard");
     } catch (e: any) {
-      const msg = e?.response?.data?.message || "登录失败，请稍后再试";
+      const msg = e?.response?.data?.message || "LOGIN FAILED";
       setError(msg);
     }
   };

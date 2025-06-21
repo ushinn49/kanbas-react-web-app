@@ -46,6 +46,7 @@ const modulesSlice = createSlice({
         m._id === moduleId ? { ...m, editing: true } : m
       );
     },
+
   },
 });
 
