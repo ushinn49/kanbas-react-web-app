@@ -26,15 +26,15 @@ export default function Users() {
         }
     };
 
-    const filterUsersByName = async (name: string) => {
-        setName(name);
-        if (name) {
-            const users = await client.findUsersByPartialName(name);
-            setUsers(users);
+      const filterUsersByName = async (typedName: string) => {
+        setName(typedName);
+        if (typedName) {
+          const users = await client.findUsersByPartialName(typedName);
+          setUsers(users);
         } else {
-            fetchUsers();
+          fetchUsers();
         }
-    };
+      };
 
     const createUser = async () => {
         const user = await client.createUser({
