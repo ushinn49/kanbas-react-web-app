@@ -17,7 +17,6 @@ export default function Assignments() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();
   const [assignments, setAssignments] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   // 从API加载作业
   useEffect(() => {
