@@ -1,9 +1,16 @@
 import axios from "axios";
 
-const axiosWithCredentials = axios.create({ withCredentials: true });
-
-export const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER || "http://localhost:4000";
+// 确保API地址使用正确的URL格式
+export const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER || 
+  (location.hostname === "localhost" ? "http://localhost:4000" : "https://kambaz-node-server-app-a6-qbwt.onrender.com");
+  
+console.log("Using API server:", REMOTE_SERVER);
 export const USERS_API = `${REMOTE_SERVER}/api/users`;
+
+const axiosWithCredentials = axios.create({ 
+  withCredentials: true,
+  timeout: 10000 // 增加超时时间
+});
 
 export const findAllUsers = async () => {
     const response = await axiosWithCredentials.get(USERS_API);
@@ -51,8 +58,15 @@ export const signout = async () => {
 };
 
 export const signup = async (user: any) => {
-    const response = await axiosWithCredentials.post(`${USERS_API}/signup`, user);
-    return response.data;
+    try {
+        console.log("Signing up user:", user);
+        const response = await axiosWithCredentials.post(`${USERS_API}/signup`, user);
+        console.log("Signup response:", response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Signup error:", error);
+        throw error;
+    }
 };
 
 export const profile = async () => {
