@@ -37,8 +37,6 @@ export default function Assignments() {
         console.error("Error loading assignments:", error);
         // 如果API失败，使用Redux的缓存
         setAssignments(reduxAssignments.filter((a: any) => a.course === cid));
-      } finally {
-        setLoading(false);
       }
     }
     
