@@ -21,19 +21,44 @@ export default function Signup() {
       setError("Passwords do not match.");
       return;
     }
+    
+    // 确认输入不为空
+    if (!user.username || !user.password) {
+      setError("Username and password are required.");
+      return;
+    }
+    
     try {
-      // The client.signup function will send the username and password to the server.
-      const newUser = await client.signup({ username: user.username, password: user.password });
+      console.log("Attempting to sign up with:", { username: user.username });
+      
+      // 添加默认值，确保注册数据完整
+      const userData = {
+        username: user.username,
+        password: user.password,
+        firstName: "",
+        lastName: "",
+        email: `${user.username}@example.com`, // 提供默认邮箱
+        role: "STUDENT" // 默认角色
+      };
+      
+      // 发送到服务器
+      const newUser = await client.signup(userData);
+      console.log("Signup successful:", newUser);
+      
       if (newUser) {
         dispatch(setCurrentUser(newUser));
         navigate("/Kambaz/Account/Profile");
       }
     } catch (err: any) {
-      // If the server returns an error (e.g., username taken), display it.
+      console.error("Signup error:", err);
+      
+      // 显示详细错误信息
       if (err.response && err.response.data) {
-        setError(err.response.data.message);
+        setError(`Server error: ${err.response.data.message || "Unknown server error"}`);
+      } else if (err.message) {
+        setError(`Error: ${err.message}`);
       } else {
-        setError("An unknown error occurred during signup.");
+        setError("An unknown error occurred during signup. Please try again.");
       }
     }
   };
