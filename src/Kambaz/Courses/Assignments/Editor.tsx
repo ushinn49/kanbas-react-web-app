@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { addAssignment, updateAssignment } from "./reducer";
+import * as client from "./client";
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
@@ -33,13 +34,36 @@ export default function AssignmentEditor() {
     }
   }, [assignment, aid]);
 
-  const handleSave = () => {
-    if (aid === "new") {
-      dispatch(addAssignment({ ...assignmentData, course: cid }));
-    } else {
-      dispatch(updateAssignment({ ...assignmentData, _id: aid }));
+  const handleSave = async () => {
+    try {
+      if (aid === "new") {
+        // Save to Redux store
+        const newAssignment = { ...assignmentData, course: cid };
+        dispatch(addAssignment(newAssignment));
+        
+        // Save to database
+        if (cid) {
+          console.log("Saving new assignment to database:", newAssignment);
+          const savedAssignment = await client.createAssignment(cid, newAssignment);
+          console.log("Assignment saved to database:", savedAssignment);
+        }
+      } else {
+        // Update in Redux store
+        const updatedAssignment = { ...assignmentData, _id: aid, course: cid };
+        dispatch(updateAssignment(updatedAssignment));
+        
+        // Update in database
+        if (aid) {
+          console.log("Updating assignment in database:", updatedAssignment);
+          const result = await client.updateAssignment(updatedAssignment);
+          console.log("Assignment updated in database:", result);
+        }
+      }
+      navigate(`/Kambaz/Courses/${cid}/Assignments`);
+    } catch (error) {
+      console.error("Error saving assignment:", error);
+      alert("Error saving assignment. Please try again.");
     }
-    navigate(`/Kambaz/Courses/${cid}/Assignments`);
   };
 
   return (
