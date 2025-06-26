@@ -8,7 +8,7 @@ import { FaPlus } from "react-icons/fa";
 export default function Users() {
     const [users, setUsers] = useState<any[]>([]);
     const [role, setRole] = useState("");
-    const [name, setName] = useState("");
+    const [_name, setName] = useState("");
     const { uid } = useParams();
 
     const fetchUsers = async () => {
@@ -26,15 +26,15 @@ export default function Users() {
         }
     };
 
-      const filterUsersByName = async (typedName: string) => {
-        setName(typedName);
-        if (typedName) {
-          const users = await client.findUsersByPartialName(typedName);
-          setUsers(users);
+    const filterUsersByName = async (name: string) => {
+        setName(name);
+        if (name) {
+            const users = await client.findUsersByPartialName(name);
+            setUsers(users);
         } else {
-          fetchUsers();
+            fetchUsers();
         }
-      };
+    };
 
     const createUser = async () => {
         const user = await client.createUser({
