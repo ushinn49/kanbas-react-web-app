@@ -1,4 +1,4 @@
-import { addModule, editModule, updateModule, deleteModule, setModules } from "./reducer";
+import { addModule, updateModule, deleteModule, editModule as editModuleAction } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
