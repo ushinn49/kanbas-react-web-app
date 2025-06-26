@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router";
-import { addModule, updateModule, deleteModule, editModule as editModuleAction } from "./reducer";
+import { addModule, editModule, updateModule, deleteModule } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 import ModulesControls from "./ModulesControls";
 import { BsGripVertical } from "react-icons/bs";
@@ -53,7 +53,7 @@ export default function Modules() {
                   deleteModule={(moduleId) => {
                     dispatch(deleteModule(moduleId));
                   }}
-                  editModule={(moduleId) => dispatch(editModuleAction(moduleId))}
+                  editModule={(moduleId) => dispatch(editModule(moduleId))}
                 />
               </div>
             </ListGroup.Item>
