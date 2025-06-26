@@ -1,23 +1,68 @@
 import { useParams, useNavigate, Link } from "react-router-dom"; 
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer"; 
+import { deleteAssignment, updateAssignment } from "./reducer"; 
 import { FaPlus, FaSearch, FaCheckCircle } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
 import { BsGripVertical } from "react-icons/bs";
-import {  FaPencil, FaTrashCan } from "react-icons/fa6"; 
+import { FaPencil, FaTrashCan } from "react-icons/fa6";
+import * as client from "./client";
+import { useEffect, useState } from "react";
 
 
 
 export default function Assignments() {
   const { cid } = useParams<{ cid: string }>();
   const navigate = useNavigate();
-  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { assignments: reduxAssignments } = useSelector((state: any) => state.assignmentsReducer);
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();
+  const [assignments, setAssignments] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleDeleteAssignment = (assignmentId: string, assignmentTitle: string) => {
+  // 从API加载作业
+  useEffect(() => {
+    async function loadAssignments() {
+      try {
+        if (cid) {
+          console.log("Loading assignments from API for course:", cid);
+          const apiAssignments = await client.findAssignmentsForCourse(cid);
+          console.log("API Assignments:", apiAssignments);
+          
+          // 用API加载的作业更新Redux state
+          dispatch(updateAssignment({ type: "SET_ASSIGNMENTS", payload: apiAssignments }));
+          
+          // 更新本地state
+          setAssignments(apiAssignments);
+        }
+      } catch (error) {
+        console.error("Error loading assignments:", error);
+        // 如果API失败，使用Redux的缓存
+        setAssignments(reduxAssignments.filter((a: any) => a.course === cid));
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    loadAssignments();
+  }, [cid, dispatch]);
+
+  const handleDeleteAssignment = async (assignmentId: string, assignmentTitle: string) => {
     if (window.confirm(`Are you sure you want to delete the assignment "${assignmentTitle}"?`)) {
-      dispatch(deleteAssignment(assignmentId));
+      try {
+        // 先从Redux中删除
+        dispatch(deleteAssignment(assignmentId));
+        
+        // 从本地state中移除
+        setAssignments(assignments.filter(a => a._id !== assignmentId));
+        
+        // 从数据库中删除
+        console.log("Deleting assignment from database:", assignmentId);
+        await client.deleteAssignment(assignmentId);
+        console.log("Assignment deleted from database");
+      } catch (error) {
+        console.error("Error deleting assignment:", error);
+        alert("Error deleting assignment. Please try again.");
+      }
     }
   };
 
